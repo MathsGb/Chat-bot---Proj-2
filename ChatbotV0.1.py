@@ -1,4 +1,3 @@
-
 from asyncio import wait
 import telebot
 
@@ -7,8 +6,7 @@ bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=["start"])
 def Inicio(mensagem):
-    text = """
-    Sejá muito bem vindo a Lensbot
+    text = """Sejá muito bem vindo a Lensbot
 
 Sou Lenina e estou aqui para ajudar em como se comunicar com a escolaridade, no futuro.... :P
 
@@ -34,8 +32,7 @@ def Curso(mensagem):
 @bot.message_handler(commands=["Computacao", "Automacao", "Quimica", "Hidrica"])
 def resposta(mensagem):
     bot.send_message(mensagem.chat.id, "https://drive.google.com/file/d/1NxgAicFzdM_369I5u6ExakDXoe_Luyit/view?usp=sharing")
-
-
+    bot.send_message(mensagem.chat.id, "É só baixar, se quiser pode voltar ao /start")
 
 @bot.message_handler(commands=["UABJ"])
 def site(mensagem):
@@ -73,23 +70,25 @@ kkkkkkk não pense que pode vencer, quer ir /denovo ?"""
 
 @bot.message_handler(commands=["denovo"])
 def burro(mensagem):
-    text = """Só pode estar louco, não há como me vencer
-vamos pular logo pro fim , clique /aqui"""
+    text = """Voce que sabe /Jokenpo
+Não há como me vencer vamos pular logo pro fim , clique /aqui"""
     bot.reply_to(mensagem, text)
 
-def verificar(mensagem):
-    return True
 
 @bot.message_handler(commands=["aqui"])
 def monke(mensagem):
-    bot.send_message(mensagem.chat.id, "Fale com o criador : https://github.com/MathsGb")
-    
+    bot.send_message(mensagem.chat.id, "Fale com o criador : https://github.com/MathsGb ou dê o /start")
+    # bot.send_sticker(mensagem.chat.id, "https://api.telegram.org/bot<token>/sendSticker?chat_id=<id>&file_id=CAADAgADOQADfyesDlKEqOOd72VKAg")
     # "https://i.kym-cdn.com/photos/images/newsfeed/001/867/654/334.jpg"
+
+def verificar(mensagem):
+    return True
 
 @bot.message_handler(func= verificar)
 def Falhou(mensagem):
     text = """ Esse comando não existe, por favor insirá um comando válido ou dê /start denovo.
     Se quiser sair desse loop clique /aqui"""
+    bot.send_photo(mensagem.chat.id, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmDxngEbCHtfceQvXnZ-mYH2iUU5b3JRd9sw&usqp=CAU")
     bot.send_message(mensagem.chat.id, text)
 
 bot.polling()
