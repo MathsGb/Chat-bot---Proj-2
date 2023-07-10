@@ -10,12 +10,18 @@ def Inicio(mensagem):
 
 Sou Lenina e estou aqui para ajudar em como se comunicar com a escolaridade, no futuro.... :P
 
+Diga vc é um Aluno? /sim ou /nao
+
 Por enquanto que tal aproveitar alguma funções?
 
     - Você pode ver o seu /Horario
     - Olhar o site da /UABJ
+    - Entre em contato com algum dos nossos /Emails
     - Ou podemos só jogar /Jokenpo
+    
+    Diga vc é um Aluno? /sim ou /nao
     """
+
     bot.send_message(mensagem.chat.id, text)
 
 @bot.message_handler(commands=["Horario"])
@@ -38,6 +44,26 @@ def resposta(mensagem):
 def site(mensagem):
     bot.send_photo(mensagem.chat.id, "https://www.bj1.com.br/wp-content/uploads/2022/03/UABJ.jpeg")
     bot.send_message(mensagem.chat.id, "http://www.uabj.ufrpe.br")
+    bot.send_message(mensagem.chat.id, "Lembre-se se quiser recomeçar só clicar no /start")
+
+@bot.message_handler(commands=["Emails"])
+def atalho(mensagem):
+    text = """Emails para caso queira entrar em contato:
+
+MAYLA STELLA DO NASCIMENTO FERREIRA
+Assistente Social
+Contato: servicosocial.uabj@ufrpe.br
+
+EVERSON DOS SANTOS MELO
+ Psicólogo
+ Contato: psicologiauabj@ufrpe.br
+
+ROSANA MARIA DOS SANTOS
+ Assistente em Administração
+ Contato: admnaps.uabj@ufrpe.br
+    """
+
+    bot.send_message(mensagem.chat.id, text)
     bot.send_message(mensagem.chat.id, "Lembre-se se quiser recomeçar só clicar no /start")
 
 @bot.message_handler(commands=["Jokenpo"])
@@ -68,12 +94,25 @@ def venci(mensagem):
 kkkkkkk não pense que pode vencer, quer ir /denovo ?"""
     bot.reply_to(mensagem, text)
 
+def matricula():
+    
+    return True
+    
+
+@bot.message_handler(commands=["sim"])
+def aluno(msg):
+    @bot.send_message(msg.chat.id, "Qual o sua matrícula?")
+
+# @bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text)
+# def resposta(msg):
+#     if msg.text == "Hi":
+#         bot.send_message(msg.chat.id,"Hello!")
+
 @bot.message_handler(commands=["denovo"])
 def burro(mensagem):
     text = """Voce que sabe /Jokenpo
 Não há como me vencer vamos pular logo pro fim , clique /aqui"""
     bot.reply_to(mensagem, text)
-
 
 @bot.message_handler(commands=["aqui"])
 def monke(mensagem):
