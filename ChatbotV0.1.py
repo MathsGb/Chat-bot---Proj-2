@@ -1,10 +1,29 @@
-from asyncio import wait
 import telebot
+
+def matrícula(x):
+    ListaAlunos = [20210009722, 20210009703, 20210009716]
+    i = 0
+    while( i < len(ListaAlunos)):
+        if( x ==  ListaAlunos[ i ] ):
+            return True
+        i += 1
+    return False
+
+def verificar(mensagem):
+    return True
 
 TOKEN = "6092476379:AAELQfPNyo8B9SasLginEuWp-_6_WdZPJow"
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=["start"])
+def Inicio(mensagem):
+    text = """Sejá muito bem vindo a Lensbot
+
+Para iniciar precisamos saber se voce está matrículado na no curso."""
+    bot.send_message(mensagem.chat.id, text)
+    bot.send_message(mensagem.chat.id, "Por favor digite sua matrícula ")
+
+@bot.message_handler(commands=["menu"])
 def Inicio(mensagem):
     text = """Sejá muito bem vindo a Lensbot
 
@@ -19,7 +38,6 @@ Por enquanto que tal aproveitar alguma funções?
     - Entre em contato com algum dos nossos /Emails
     - Ou podemos só jogar /Jokenpo
     
-    Diga vc é um Aluno? /sim ou /nao
     """
 
     bot.send_message(mensagem.chat.id, text)
@@ -94,19 +112,27 @@ def venci(mensagem):
 kkkkkkk não pense que pode vencer, quer ir /denovo ?"""
     bot.reply_to(mensagem, text)
 
-def matricula():
-    
-    return True
-    
+@bot.message_handler(commands=["help"])
+def ajuda(mensagem):
+    Text = """Não se preucupe, sempre que não souber o que fazer você pode sempre começar de novo.
+Aqui está a lista de comandos úteis:
+/start
+/Horario
+/UABJ
+/Emails
+"""
+    bot.send_message(mensagem.chat.id, Text)
 
-@bot.message_handler(commands=["sim"])
-def aluno(msg):
-    @bot.send_message(msg.chat.id, "Qual o sua matrícula?")
 
-# @bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text)
-# def resposta(msg):
-#     if msg.text == "Hi":
-#         bot.send_message(msg.chat.id,"Hello!")
+@bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text)
+def conferir(msg):
+    if(matrícula(int(msg.text)) == True):
+        Text = """Bem vindo Aluno
+Talvez possa gostar de dar uma olhada no nosso /menu para ver tudo que esse Bot tem a oferecer.
+"""
+        bot.send_message(msg.chat.id, Text)
+    else: bot.send_message(msg.chat.id, "Desculpe esse Bot só está disponível para alunos UABJ")
+
 
 @bot.message_handler(commands=["denovo"])
 def burro(mensagem):
@@ -120,14 +146,11 @@ def monke(mensagem):
     # bot.send_sticker(mensagem.chat.id, "https://api.telegram.org/bot<token>/sendSticker?chat_id=<id>&file_id=CAADAgADOQADfyesDlKEqOOd72VKAg")
     # "https://i.kym-cdn.com/photos/images/newsfeed/001/867/654/334.jpg"
 
-def verificar(mensagem):
-    return True
-
-@bot.message_handler(func= verificar)
-def Falhou(mensagem):
-    text = """ Esse comando não existe, por favor insirá um comando válido ou dê /start denovo.
-    Se quiser sair desse loop clique /aqui"""
-    bot.send_photo(mensagem.chat.id, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmDxngEbCHtfceQvXnZ-mYH2iUU5b3JRd9sw&usqp=CAU")
-    bot.send_message(mensagem.chat.id, text)
+# @bot.message_handler(func= verificar)
+# def Falhou(mensagem):
+#     text = """ Esse comando não existe, por favor insirá um comando válido ou dê /start denovo.
+#     Se quiser sair desse loop clique /aqui"""
+#     bot.send_photo(mensagem.chat.id, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmDxngEbCHtfceQvXnZ-mYH2iUU5b3JRd9sw&usqp=CAU")
+#     bot.send_message(mensagem.chat.id, text)
 
 bot.polling()
