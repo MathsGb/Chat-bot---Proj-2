@@ -56,7 +56,7 @@ def Curso(mensagem):
 @bot.message_handler(commands=["Computacao", "Automacao", "Quimica", "Hidrica"])
 def resposta(mensagem):
     bot.send_message(mensagem.chat.id, "https://drive.google.com/file/d/1NxgAicFzdM_369I5u6ExakDXoe_Luyit/view?usp=sharing")
-    bot.send_message(mensagem.chat.id, "É só baixar, se quiser pode voltar ao /start")
+    bot.send_message(mensagem.chat.id, "É só baixar, se quiser pode voltar ao /menu")
 
 @bot.message_handler(commands=["UABJ"])
 def site(mensagem):
