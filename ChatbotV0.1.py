@@ -1,5 +1,5 @@
 import telebot
-
+from Secrets import TOKEN
 def matrícula(x):
     ListaAlunos = [20210009722, 20210009703, 20210009716]
     i = 0
@@ -12,7 +12,7 @@ def matrícula(x):
 def verificar(mensagem):
     return True
 
-TOKEN = "6092476379:AAELQfPNyo8B9SasLginEuWp-_6_WdZPJow"
+
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=["start"])
@@ -158,8 +158,7 @@ Caso esteja perdido sempre pode voltar para o /menu. """
 
 @bot.message_handler(commands=["aqui"])
 def monke(mensagem):
-    bot.send_message(mensagem.chat.id, "Fale com o criador : https://github.com/MathsGb ou dê o /start")
-    # bot.send_sticker(mensagem.chat.id, "https://api.telegram.org/bot<token>/sendSticker?chat_id=<id>&file_id=CAADAgADOQADfyesDlKEqOOd72VKAg")
-    # "https://i.kym-cdn.com/photos/images/newsfeed/001/867/654/334.jpg"
+    bot.send_message(mensagem.chat.id, "Fale com o bot manager : https://github.com/MathsGb ou volte para o /menu")
+    
 
 bot.polling()
