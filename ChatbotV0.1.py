@@ -19,7 +19,7 @@ bot = telebot.TeleBot(TOKEN)
 def Inicio(mensagem):
     text = """Sejá muito bem vindo a Lensbot
 
-Para iniciar precisamos saber se voce está matrículado na no curso."""
+Digite /menu para acessar os comandos."""
     bot.send_message(mensagem.chat.id, text)
     bot.send_message(mensagem.chat.id, "Por favor digite sua matrícula ")
 
@@ -36,6 +36,7 @@ Por enquanto que tal aproveitar alguma funções?
     - Entre em contato com algum dos nossos /Emails
     - Ou podemos só jogar /Jokenpo
     - Se tiver alguma dúvida dê uma olhada no nosso /FAQ
+    - Se quiser sugerir alguma pergunta para ser adicionada a este bot, /Sugestao
 
 Lembre-se sempre que se sentir perdido use /menu ou /help
     
@@ -128,8 +129,7 @@ def conferir(msg):
     if(matrícula(int(msg.text)) == True):
         Text = """Bem vindo Aluno jardineiro !!!
 
-Talvez possa gostar de dar uma olhada no nosso /menu para ver tudo que esse Bot tem a oferecer.
-"""
+Talvez possa gostar de dar uma olhada no nosso /menu para ver tudo que esse Bot tem a oferecer."""
         bot.send_message(msg.chat.id, Text)
     else: bot.send_message(msg.chat.id, "Desculpe esse Bot só está disponível para alunos UABJ")
 
@@ -161,5 +161,11 @@ def monke(mensagem):
     bot.send_message(mensagem.chat.id, "Fale com o criador : https://github.com/MathsGb ou dê o /start")
     # bot.send_sticker(mensagem.chat.id, "https://api.telegram.org/bot<token>/sendSticker?chat_id=<id>&file_id=CAADAgADOQADfyesDlKEqOOd72VKAg")
     # "https://i.kym-cdn.com/photos/images/newsfeed/001/867/654/334.jpg"
+
+@bot.message_handler(commands=["Sugestao"])
+def enviar_sugestao(mensagem):
+    faq_link = "http://127.0.0.1:5000/index_aluno"  # Substitua pelo endereço correto do FAQ
+    bot.send_message(mensagem.chat.id, f"Para enviar uma sugestão, acesse o FAQ através deste link: {faq_link}")
+    bot.send_message(mensagem.chat.id, "Lembre-se se quiser voltar, é só clicar no /menu")
 
 bot.polling()
