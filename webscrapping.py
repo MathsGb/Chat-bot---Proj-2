@@ -12,15 +12,15 @@ bot = telegram.Bot(token=TOKEN)
 
     # Send each message chunk to the Telegram channel
 async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    url = 'http://www.uabj.ufrpe.br/br/assistência-estudantil-na-uabj'
+    url = 'https://www.prg.unicamp.br/graduacao/pad/'
     response = requests.get(url)
 
     soup = BeautifulSoup(response.content, 'html.parser')
-    articles = soup.find_all('div', class_='field field-name-body field-type-text-with-summary field-label-hidden')
+    articles = soup.find_all('div', class_='elementor-text-editor elementor-clearfix')
     headlines = []
 
     for article in articles:
-        headline_element = article.find('p', class_='rtejustify')
+        headline_element = article.find('p')
         if headline_element is not None:
             headline = headline_element.text.strip()
             # link = 'https://www.bbc.com' + article.find('a')['href']
@@ -30,7 +30,8 @@ async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     message = 'Programa de bolsas: \n\n'
     message_chunks = []
     for headline in headlines:
-        message_chunk = f'- {headline["headline"]}\n{headline["link"]}\n\n'
+        message_chunk = f'- {headline}\n'
+        # {headline["link"]}\n\n
         if len(message + message_chunk) > 4000:
             message_chunks.append(message)
             message = 'Programa de bolsas (continuação):\n\n'

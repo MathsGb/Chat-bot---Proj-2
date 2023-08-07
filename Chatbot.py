@@ -1,13 +1,12 @@
 import telebot
 from Secrets import TOKEN
-from Metodos import Start_txt, email_text, Menu_text, FAQ_text, base_Text, Curso_text, help_Text
+from Metodos import Start_txt, email_text, Menu_text, FAQ_text, base_Text, Curso_text, help_Text, leitura
 
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=["start"])
 def Inicio(mensagem):
     bot.send_message(mensagem.chat.id, Start_txt)
-    bot.send_message(mensagem.chat.id, "Por favor digite sua matrícula ")
 
 @bot.message_handler(commands=["menu"])
 def Inicio(mensagem):
@@ -16,7 +15,6 @@ def Inicio(mensagem):
 @bot.message_handler(commands=["Horario"])
 def Curso(mensagem):
     bot.send_message(mensagem.chat.id, Curso_text)
-
 
 @bot.message_handler(commands=["Computacao", "Automacao", "Quimica", "Hidrica"])
 def resposta(mensagem):
@@ -38,11 +36,9 @@ def atalho(mensagem):
 def ajuda(mensagem):
     bot.send_message(mensagem.chat.id, help_Text)
 
-@bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text)
-def conferir(msg):
-    bot.send_message(msg.chat.id, base_Text)
-
-
+# @bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text)
+# def conferir(mensagem):
+#     bot.send_message(mensagem.chat.id, base_Text)
 
 @bot.message_handler(commands=["FAQ"])
 def perguntas(mensagem):
@@ -51,5 +47,14 @@ def perguntas(mensagem):
 @bot.message_handler(commands=["aqui"])
 def dev(mensagem):
     bot.send_message(mensagem.chat.id, "Fale com o bot manager : https://github.com/MathsGb ou volte para o /menu")
+
+@bot.message_handler(commands= ["bolsas"])
+def duvida(msg):
+    bot.send_message(msg.chat.id, "caso tenha alguma dúvida espqcífica envie 'bolsa:' e sua dúvida'")
+
+@bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text and leitura(msg.text) == True)
+def envio(msg):
+    bot.send_message(msg.chat.id, "mensagem recebida")
     
+
 bot.polling()

@@ -1,3 +1,16 @@
+from flask import Flask, make_response, jsonify
+
+app = Flask(__name__)
+
+def leitura(mensagem):
+    texto = ''
+    for i in range(6):
+        texto += (mensagem[i])
+
+    if texto == ('bolsa:' or 'matricula' or 'evento'):
+        return True
+    return False
+
 Start_txt = """Sejá muito bem vindo a Lensbot
 
 Para iniciar Consulte o nosso /menu"""
@@ -67,40 +80,3 @@ Já para o caso da AEB estamos com alguns problemas em estabelecer a rede no mom
 Iremos sempre atualiza-las conforme a demanda então se a sua dúvida não está aqui tenta manda diretamente para algum e-mail oficial na barra de /Emails. Por algum motivo ache isso trabalhoso ಠಿ⁠_⁠ಠ não se preocupe, estou trabalhando para que posso enviar mensagem diretamente daqui do telegram.
 
 Caso esteja perdido sempre pode voltar para o /menu. """
-
-
-# @bot.message_handler(commands=["Jokenpo"])
-# def jogo(mensagem):
-#     text = """ Qual voce escolhe?
-
-# /Pedra
-# /Papel
-# /Tesoura
-#     """
-#     bot.send_message(mensagem.chat.id,text)
-
-# @bot.message_handler(commands=["Pedra"])
-# def venci(mensagem):
-#     text = """Eu escolhi Papel UWU
-# kkkkkkk não pense que pode vencer, quer ir /denovo ?"""
-#     bot.reply_to(mensagem, text)
-
-# @bot.message_handler(commands=["Papel"])
-# def venci(mensagem):
-#     text = """Eu escolhi Tesoura UWU
-# kkkkkkk não pense que pode vencer, quer ir /denovo ?"""
-#     bot.reply_to(mensagem, text)
-
-# @bot.message_handler(commands=["Tesoura"])
-# def venci(mensagem):
-#     text = """Eu escolhi Pedra UWU
-# kkkkkkk não pense que pode vencer, quer ir /denovo ?"""
-#     bot.reply_to(mensagem, text)
-
-
-# @bot.message_handler(commands=["denovo"])
-# def burro(mensagem):
-#     text = """Voce que sabe /Jokenpo
-# Não há como me vencer vamos pular logo pro fim , clique /aqui"""
-#     bot.reply_to(mensagem, text)
-    
