@@ -6,9 +6,6 @@ from pyngrok import ngrok
 
 app = Flask(__name__)
 
-
-app = Flask(__name__)
-
 # Configurar o bot do Telegram
 bot = Bot(token=TOKEN)
 

@@ -1,6 +1,12 @@
 import telebot
+import requests
+from bs4 import BeautifulSoup
 from Secrets import TOKEN
 from Metodos import Start_txt, email_text, Menu_text, FAQ_text, base_Text, Curso_text, help_Text, leitura
+from webscrapping import hello
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -36,9 +42,9 @@ def atalho(mensagem):
 def ajuda(mensagem):
     bot.send_message(mensagem.chat.id, help_Text)
 
-# @bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text)
-# def conferir(mensagem):
-#     bot.send_message(mensagem.chat.id, base_Text)
+@bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text)
+def conferir(mensagem):
+    bot.send_message(mensagem.chat.id, base_Text)
 
 @bot.message_handler(commands=["FAQ"])
 def perguntas(mensagem):
@@ -55,6 +61,37 @@ def duvida(msg):
 @bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text and leitura(msg.text) == True)
 def envio(msg):
     bot.send_message(msg.chat.id, "mensagem recebida")
-    
+
+@bot.message_handler(commands=['hello'])
+def webtal(msg):
+
+    url = 'https://www.prg.unicamp.br/graduacao/pad/'
+
+    response = requests.get(url)
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    articles = soup.find_all('div', class_='elementor-text-editor elementor-clearfix')
+    headlines = []
+
+    for article in articles:
+        headline_element = article.find('p')   #selecionando cada elemento <p> naquela div
+        if headline_element is not None:
+            headline = headline_element.text.strip() + "\n"
+            headlines.append({'headline': headline, })
+
+    message = 'Essas são as ultimas informações que se tem sobre bolsas no nosso site:\n\n'
+    message_chunks = []
+    for headline in headlines:
+
+        message_chunk = f'- {headline["headline"]}\n'
+        if len(message + message_chunk) > 4000:    #tratamento para textos que excedam o limite de characteres do telegram
+            message_chunks.append(message)
+            message = 'informações sobre bolsas (continuação):\n\n'
+        message += message_chunk
+        # Add the last message to the message_chunks list
+    message_chunks.append(message)
+    for message_chunk in message_chunks:
+        text = f'{message_chunk }'
+        bot.send_message(msg.chat.id, text)
 
 bot.polling()
