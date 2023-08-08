@@ -62,7 +62,7 @@ def duvida(msg):
 def envio(msg):
     bot.send_message(msg.chat.id, "mensagem recebida")
 
-@bot.message_handler(commands=['hello'])
+@bot.message_handler(commands=['Bolsas'])
 def webtal(msg):
 
     url = 'https://www.prg.unicamp.br/graduacao/pad/'
