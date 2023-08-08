@@ -1,16 +1,3 @@
-from flask import Flask, make_response, jsonify
-
-app = Flask(__name__)
-
-def leitura(mensagem):
-    texto = ''
-    for i in range(6):
-        texto += (mensagem[i])
-
-    if texto == ('bolsa:' or 'matricula' or 'evento'):
-        return True
-    return False
-
 Start_txt = """Sejá muito bem vindo a Lensbot
 
 Para iniciar Consulte o nosso /menu"""
@@ -25,7 +12,7 @@ Por enquanto que tal aproveitar alguma funções?
     - Olhar o site da /UABJ\n
     - Entre em contato com algum dos nossos /emails\n
     - Se tiver alguma dúvida dê uma olhada no nosso /FAQ\n
-    - Precisando saber mais sobre /bolsas
+    - Precisando saber mais sobre /bolsas'\n
     - Caso tenha mais dúvidas consulte os nossos /devs
 
 Lembre-se sempre que se sentir perdido use /menu ou /help
@@ -51,14 +38,19 @@ EVERSON DOS SANTOS MELO
 ROSANA MARIA DOS SANTOS
  Assistente em Administração
  Contato: admnaps.uabj@ufrpe.br
+
+Contatar a escolaridade:
+ escolaridade.uabj@ufrpe.br
     """
 
 help_Text = """Não se preucupe, sempre que não souber o que fazer você pode sempre começar de novo.
 Aqui está a lista de comandos úteis:
 /start
-/Horario
+/horario
 /UABJ
-/Emails
+/emails
+/help
+/bolsas
 """
 
 base_Text = """Bem vindo Aluno jardineiro !!!
@@ -85,4 +77,21 @@ devs_text = """"
 Fale com o bot manager : https://github.com/MathsGb
                          https://github.com/Thales-Gabriel-Soares-Amorim
                          https://github.com/PunkPotatoQueen
-ou volte para o /menu")"""
+
+Ou volte para o /menu")"""
+
+
+
+
+# from flask import Flask, make_response, jsonify
+
+# app = Flask(__name__)
+
+# def leitura(mensagem):
+#     texto = ''
+#     for i in range(6):
+#         texto += (mensagem[i])
+
+#     if texto == ('bolsa:' or 'matricula' or 'evento'):
+#         return True
+#     return False

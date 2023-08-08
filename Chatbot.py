@@ -1,12 +1,10 @@
 import telebot
 
-from Metodos import Start_txt, email_text, Menu_text, FAQ_text, base_Text, Curso_text, help_Text
 import requests
 from bs4 import BeautifulSoup
 from Secrets import TOKEN
 from Metodos import Start_txt, email_text, Menu_text, FAQ_text, base_Text, Curso_text, help_Text, devs_text
 
-TOKEN = "6092476379:AAELQfPNyo8B9SasLginEuWp-_6_WdZPJow"
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=["start"])
@@ -42,9 +40,6 @@ def atalho(mensagem):
 def ajuda(mensagem):
     bot.send_message(mensagem.chat.id, help_Text)
 
-# @bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text)
-# def conferir(mensagem):
-#     bot.send_message(mensagem.chat.id, base_Text)
 
 @bot.message_handler(commands=["FAQ"])
 def perguntas(mensagem):
@@ -53,7 +48,6 @@ def perguntas(mensagem):
 @bot.message_handler(commands=["devs"])
 def dev(mensagem):
     bot.send_message(mensagem.chat.id, devs_text)
-
 
 @bot.message_handler(commands=['bolsas'])
 def webtal(msg):
@@ -66,7 +60,7 @@ def webtal(msg):
     headlines = []
 
     for article in articles:
-        headline_element = article.find('p')   #selecionando cada elemento <p> naquela div
+        headline_element = article.find('p')   # Selecionando cada elemento <p> naquela div
         if headline_element is not None:
             headline = headline_element.text.strip() + "\n"
             headlines.append({'headline': headline, })
@@ -87,3 +81,7 @@ def webtal(msg):
         bot.send_message(msg.chat.id, text)
 
 bot.polling()
+
+# @bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text)
+# def conferir(mensagem):
+#     bot.send_message(mensagem.chat.id, base_Text)
