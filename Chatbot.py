@@ -80,6 +80,16 @@ def webtal(msg):
         text = f'{message_chunk }'
         bot.send_message(msg.chat.id, text)
 
+
+#________________ INTEGRAÇÃO COM O SITE PARA ALUNOS _________________________
+@bot.message_handler(commands=["Sugestao"])
+def enviar_sugestao(mensagem):
+    faq_link = "http://127.0.0.1:5000/index_aluno"  # Substitua pelo endereço correto do FAQ
+    bot.send_message(mensagem.chat.id, f"Para enviar uma sugestão, acesse o FAQ através deste link: {faq_link}")
+    bot.send_message(mensagem.chat.id, "Lembre-se se quiser voltar, é só clicar no /menu")
+
+bot.polling()
+
 bot.polling()
 
 # @bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text)
