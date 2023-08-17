@@ -89,7 +89,11 @@ def conferir(msg):
 		bot.send_message(msg.chat.id, resposta)
 
 
-
+palavras_chave_lista = ["estagio", "bolsa", "bolsas","estagios"] #lista de palavras desejadas
+busca =BuscaPalavrasChave(conferir)
+resultados_busca = busca.buscar_palavras(palavras_chave_lista)
+for palavra, existe in resultados_busca.items():
+    bot.send_message(msg.chat.id, resposta)
 #======================================== Bot start =========================================================
 
 bot.polling()

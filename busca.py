@@ -24,7 +24,7 @@ busca = BuscaPalavrasChave(texto)
 
 palavra_chave = "estagios"
 existe_palavra = busca.buscar_palavra(palavra_chave)
-print(f"A palavra '{palavra_chave}' existe no texto: {existe_palavra}")
+#print(f"A palavra '{palavra_chave}' existe no texto: {existe_palavra}")
 
 palavras_chave_lista = ["estagio", "bolsa", "bolsas"]
 resultados_busca = busca.buscar_palavras(palavras_chave_lista)
