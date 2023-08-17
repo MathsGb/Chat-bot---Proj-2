@@ -1,16 +1,3 @@
-from flask import Flask, make_response, jsonify
-
-app = Flask(__name__)
-
-def leitura(mensagem):
-    texto = ''
-    for i in range(6):
-        texto += (mensagem[i])
-
-    if texto == ('bolsa:' or 'matricula' or 'evento'):
-        return True
-    return False
-
 Start_txt = """Sejá muito bem vindo a Lensbot
 
 Para iniciar Consulte o nosso /menu"""
@@ -21,10 +8,12 @@ Sou Lenina e estou aqui para ajudar em como se comunicar com a escolaridade, no 
 
 Por enquanto que tal aproveitar alguma funções?
 
-    - Você pode ver o seu /Horario
-    - Olhar o site da /UABJ
-    - Entre em contato com algum dos nossos /Emails
-    - Se tiver alguma dúvida dê uma olhada no nosso /FAQ
+    - Você pode ver o seu /horario\n
+    - Olhar o site da /UABJ\n
+    - Entre em contato com algum dos nossos /emails\n
+    - Se tiver alguma dúvida dê uma olhada no nosso /FAQ\n
+    - Precisando saber mais sobre /bolsas'\n
+    - Caso tenha mais dúvidas consulte os nossos /devs
 
 Lembre-se sempre que se sentir perdido use /menu ou /help
     """
@@ -32,10 +21,8 @@ Lembre-se sempre que se sentir perdido use /menu ou /help
 
 Curso_text = """Qual o seu curso na UABJ?
 
-/Computacao
-/Automacao
-/Quimica
-/Hidrica
+/computacao   /automacao 
+/quimica      /hidrica
     """
 
 email_text = """Emails para caso queira entrar em contato:
@@ -51,14 +38,19 @@ EVERSON DOS SANTOS MELO
 ROSANA MARIA DOS SANTOS
  Assistente em Administração
  Contato: admnaps.uabj@ufrpe.br
+
+Contatar a escolaridade:
+ escolaridade.uabj@ufrpe.br
     """
 
 help_Text = """Não se preucupe, sempre que não souber o que fazer você pode sempre começar de novo.
 Aqui está a lista de comandos úteis:
 /start
-/Horario
+/horario
 /UABJ
-/Emails
+/emails
+/help
+/bolsas
 """
 
 base_Text = """Bem vindo Aluno jardineiro !!!
@@ -80,3 +72,26 @@ Já para o caso da AEB estamos com alguns problemas em estabelecer a rede no mom
 Iremos sempre atualiza-las conforme a demanda então se a sua dúvida não está aqui tenta manda diretamente para algum e-mail oficial na barra de /Emails. Por algum motivo ache isso trabalhoso ಠಿ⁠_⁠ಠ não se preocupe, estou trabalhando para que posso enviar mensagem diretamente daqui do telegram.
 
 Caso esteja perdido sempre pode voltar para o /menu. """
+
+devs_text = """"
+Fale com o bot manager : https://github.com/MathsGb
+                         https://github.com/Thales-Gabriel-Soares-Amorim
+                         https://github.com/PunkPotatoQueen
+
+Ou volte para o /menu")"""
+
+
+
+
+# from flask import Flask, make_response, jsonify
+
+# app = Flask(__name__)
+
+# def leitura(mensagem):
+#     texto = ''
+#     for i in range(6):
+#         texto += (mensagem[i])
+
+#     if texto == ('bolsa:' or 'matricula' or 'evento'):
+#         return True
+#     return False

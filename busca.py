@@ -28,5 +28,5 @@ print(f"A palavra '{palavra_chave}' existe no texto: {existe_palavra}")
 
 palavras_chave_lista = ["estagio", "bolsa", "bolsas"]
 resultados_busca = busca.buscar_palavras(palavras_chave_lista)
-for palavra, existe in resultados_busca.items():
-    print(f"A palavra '{palavra}' existe no texto: {existe}")
+#for palavra, existe in resultados_busca.items():
+    #print(f"A palavra '{palavra}' existe no texto: {existe}")
