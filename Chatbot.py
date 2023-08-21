@@ -1,9 +1,11 @@
 import telebot
 
-import requests
+import requests, urllib
 from bs4 import BeautifulSoup
 from Secrets import TOKEN
-from Metodos import Start_txt, email_text, Menu_text, FAQ_text, base_Text, Curso_text, help_Text, devs_text
+from Metodos import Start_txt, email_text, Menu_text, FAQ_text, base_Text, Curso_text, help_Text, devs_text, periodos_text
+from utils import deleta_arquivos, cria_diretorio
+
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -22,8 +24,57 @@ def Curso(mensagem):
 
 @bot.message_handler(commands=["computacao", "automacao", "quimica", "hidrica"])
 def resposta(mensagem):
-	bot.send_message(mensagem.chat.id, "https://drive.google.com/file/d/1NxgAicFzdM_369I5u6ExakDXoe_Luyit/view?usp=sharing")
-	bot.send_message(mensagem.chat.id, "É só baixar, se quiser pode voltar ao /menu")
+	try:
+		cria_diretorio('./temp')
+	except FileExistsError:
+		deleta_arquivos('./temp')
+
+	if mensagem.text == '/computacao':
+		curso = 'eng_computacao'
+	elif mensagem.text == "/automacao":
+		curso = 'eng_controle_automacao'
+	elif mensagem.text == "/quimica":
+		curso = 'eng_quimica'
+	elif mensagem.text == "/hidrica":
+		curso = 'eng_hidrica'
+	
+	with open("./temp/curso.txt", "w") as arquivo:
+		arquivo.write(curso)
+
+	bot.send_message(mensagem.chat.id, periodos_text)
+
+
+@bot.message_handler(commands=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+def periodo(mensagem):
+	curso = None
+	periodo = None
+
+	for char in mensagem.text:
+		try:
+			periodo = int(char)
+		except ValueError:
+			pass
+
+	with open("./temp/curso.txt", "r") as arquivo:
+		curso = arquivo.read()
+	
+	try:
+		arquivo = f'horario_{curso}_{periodo}_periodo.png'
+		url = 'http://127.0.0.1:5000/arquivos/' + arquivo
+		image = open('./temp/horario.png','wb')
+		image.write(urllib.request.urlopen(url).read())
+		image.close()
+
+		url_api = f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={mensagem.chat.id}'
+		img = open('./temp/horario.png', 'rb')
+		requests.post(url_api, files={'photo': img})
+
+		# bot.send_message(mensagem.chat.id, url)
+		bot.send_message(mensagem.chat.id, "Aqui está seu horário, se quiser pode voltar ao /menu")
+
+	except Exception as error:
+		bot.send_message(mensagem.chat.id, "Houve um erro ao tentar baixar seu horário :( se quiser pode voltar ao /menu")
+
 
 @bot.message_handler(commands=["UABJ"])
 def site(mensagem):
