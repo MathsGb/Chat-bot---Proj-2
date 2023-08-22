@@ -1,1 +1,5 @@
 Secrets.py
+/env
+/temp
+/__pycache__
+/.vscode

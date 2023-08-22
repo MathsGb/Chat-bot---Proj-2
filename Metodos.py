@@ -21,9 +21,25 @@ Lembre-se sempre que se sentir perdido use /menu ou /help
 
 Curso_text = """Qual o seu curso na UABJ?
 
-/computacao   /automacao 
-/quimica      /hidrica
+/computacao
+/quimica 
+/automacao      
+/hidrica
     """
+
+periodos_text = '''Qual o seu período de curso atual na UABJ?
+
+/1° - Primeiro
+/2° - Segundo
+/3° - Terceiro
+/4° - Quarto
+/5° - Quinto
+/6° - Sexto
+/7° - Sétimo
+/8° - Oitavo
+/9° - Nono
+/10° - Décimo
+    '''
 
 email_text = """Emails para caso queira entrar em contato:
 
