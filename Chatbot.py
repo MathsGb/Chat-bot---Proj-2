@@ -40,7 +40,6 @@ def atalho(mensagem):
 def ajuda(mensagem):
 	bot.send_message(mensagem.chat.id, help_Text)
 
-
 @bot.message_handler(commands=["FAQ"])
 def perguntas(mensagem):
 	bot.send_message(mensagem.chat.id, FAQ_text)

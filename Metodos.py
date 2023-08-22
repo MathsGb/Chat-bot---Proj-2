@@ -51,6 +51,8 @@ Aqui está a lista de comandos úteis:
 /emails
 /help
 /bolsas
+
+Caso ainda esta com alguma dúvida, pode escreve-lá agora mesmo que posso tentar encontrar no nosso banco de dados.
 """
 
 base_Text = """Bem vindo Aluno jardineiro !!!
