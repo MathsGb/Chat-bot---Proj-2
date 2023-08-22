@@ -60,7 +60,7 @@ def periodo(mensagem):
 	
 	try:
 		arquivo = f'horario_{curso}_{periodo}_periodo.png'
-		url = 'http://127.0.0.1:5000/arquivos/' + arquivo
+		url = 'http://equipi.pythonanywhere.com/arquivos/' + arquivo
 		image = open('./temp/horario.png','wb')
 		image.write(urllib.request.urlopen(url).read())
 		image.close()
@@ -135,7 +135,7 @@ def webtal(msg):
 
 @bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text)
 def conferir(msg):
-	resposta = requests.request("GET", ("http://127.0.0.1:5000/" + msg.text))
+	resposta = requests.request("GET", ("http://equipi.pythonanywhere.com/" + msg.text))
 	bot.send_message(msg.chat.id, resposta)
 
 
