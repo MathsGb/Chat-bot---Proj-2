@@ -3,7 +3,7 @@ import telebot
 import requests, urllib
 from bs4 import BeautifulSoup
 from Secrets import TOKEN
-from Metodos import Start_txt, email_text, Menu_text, FAQ_text, base_Text, Curso_text, help_Text, devs_text, periodos_text
+from Texts import Start_txt, email_text, Menu_text, FAQ_text, Curso_text, help_Text, devs_text, periodos_text
 from utils import deleta_arquivos, cria_diretorio
 
 
@@ -101,44 +101,44 @@ def dev(mensagem):
 
 # ================================== teste tratamento com webscrapping ==================================
 
-@bot.message_handler(commands=['bolsas'])
-def webtal(msg):
-	url = 'https://www.prg.unicamp.br/graduacao/pad/'
+# @bot.message_handler(commands=['bolsas'])
+# def webtal(msg):
+# 	url = 'https://www.prg.unicamp.br/graduacao/pad/'
 
-	response = requests.get(url)
-	soup = BeautifulSoup(response.content, 'html.parser')
-	articles = soup.find_all('div', class_='elementor-text-editor elementor-clearfix')
-	headlines = []
+# 	response = requests.get(url)
+# 	soup = BeautifulSoup(response.content, 'html.parser')
+# 	articles = soup.find_all('div', class_='elementor-text-editor elementor-clearfix')
+# 	headlines = []
 
-	for article in articles:
-		headline_element = article.find('p')   # Selecionando cada elemento <p> naquela div
-		if headline_element is not None:
-			headline = headline_element.text.strip() + "\n"
-			headlines.append({'headline': headline, })
+# 	for article in articles:
+# 		headline_element = article.find('p')   # Selecionando cada elemento <p> naquela div
+# 		if headline_element is not None:
+# 			headline = headline_element.text.strip() + "\n"
+# 			headlines.append({'headline': headline, })
 
-	message = 'Essas são as ultimas informações que se tem sobre bolsas no nosso site:\n\n'
-	message_chunks = []
-	for headline in headlines:
+# 	message = 'Essas são as ultimas informações que se tem sobre bolsas no nosso site:\n\n'
+# 	message_chunks = []
+# 	for headline in headlines:
 
-		message_chunk = f'- {headline["headline"]}\n'
-		if len(message + message_chunk) > 4000:    #tratamento para textos que excedam o limite de characteres do telegram
-			message_chunks.append(message)
-			message = 'informações sobre bolsas (continuação):\n\n'
-		message += message_chunk
+# 		message_chunk = f'- {headline["headline"]}\n'
+# 		if len(message + message_chunk) > 4000:    #tratamento para textos que excedam o limite de characteres do telegram
+# 			message_chunks.append(message)
+# 			message = 'informações sobre bolsas (continuação):\n\n'
+# 		message += message_chunk
 
-	message_chunks.append(message)
-	for message_chunk in message_chunks:
-		text = f'{message_chunk }'
-		bot.send_message(msg.chat.id, text)
+# 	message_chunks.append(message)
+# 	for message_chunk in message_chunks:
+# 		text = f'{message_chunk }'
+# 		bot.send_message(msg.chat.id, text)
 
-# =================================== Interação com site ===================================================
+# =================================== Busca no banco de dados ===================================================
 
 @bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text)
 def conferir(msg):
 	resposta = requests.request("GET", ("http://127.0.0.1:5000/" + msg.text))
 	bot.send_message(msg.chat.id, resposta)
 
-#__ INTEGRAÇÃO COM O SITE PARA ALUNOS _____
+# =================================== Segestão de perguntas ================================================
 @bot.message_handler(commands=["Sugestao"])
 def enviar_sugestao(mensagem):
     faq_link = "http://127.0.0.1:5000/index_aluno"  # Substitua pelo endereço correto do FAQ
