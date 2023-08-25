@@ -60,12 +60,12 @@ def periodo(mensagem):
 	
 	try:
 		arquivo = f'horario_{curso}_{periodo}_periodo.png'
-		url = 'http://equipi.pythonanywhere.com/arquivos/' + arquivo
+		url = 'http://127.0.0.1:5000/arquivos/' + arquivo
 		image = open('./temp/horario.png','wb')
 		image.write(urllib.request.urlopen(url).read())
 		image.close()
 
-		url_api = f'https://api.telegram.org/bot{TOKEN}/sendPhoto?chat_id={mensagem.chat.id}'
+		url_api = f'http://127.0.0.1:5000/bot{TOKEN}/sendPhoto?chat_id={mensagem.chat.id}'
 		img = open('./temp/horario.png', 'rb')
 		requests.post(url_api, files={'photo': img})
 
@@ -135,9 +135,15 @@ def webtal(msg):
 
 @bot.message_handler(func = lambda msg: msg.text is not None and '/' not in msg.text)
 def conferir(msg):
-	resposta = requests.request("GET", ("http://equipi.pythonanywhere.com/" + msg.text))
+	resposta = requests.request("GET", ("http://127.0.0.1:5000/" + msg.text))
 	bot.send_message(msg.chat.id, resposta)
 
+#__ INTEGRAÇÃO COM O SITE PARA ALUNOS _____
+@bot.message_handler(commands=["Sugestao"])
+def enviar_sugestao(mensagem):
+    faq_link = "http://127.0.0.1:5000/index_aluno"  # Substitua pelo endereço correto do FAQ
+    bot.send_message(mensagem.chat.id, f"Para enviar uma sugestão, acesse o FAQ através deste link: {faq_link}")
+    bot.send_message(mensagem.chat.id, "Lembre-se se quiser voltar, é só clicar no /menu")
 
 #======================================== Bot start =========================================================
 

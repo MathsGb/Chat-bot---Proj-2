@@ -13,7 +13,8 @@ Por enquanto que tal aproveitar alguma funções?
     - Entre em contato com algum dos nossos /emails\n
     - Se tiver alguma dúvida dê uma olhada no nosso /FAQ\n
     - Precisando saber mais sobre /bolsas'\n
-    - Caso tenha mais dúvidas consulte os nossos /devs
+    - Caso tenha mais dúvidas consulte os nossos /devs\n
+    - OU pode sugerir alguma pergunta em /Sugestao
 
 Lembre-se sempre que se sentir perdido use /menu ou /help
     """
