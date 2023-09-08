@@ -79,10 +79,12 @@ Caso ainda esta com alguma dúvida, pode escreve-lá agora mesmo que posso tenta
 
 # Caso esteja perdido sempre pode voltar para o /menu. """
 
-devs_text = """"
-Fale com o bot manager : https://github.com/MathsGb
-                         https://github.com/Thales-Gabriel-Soares-Amorim
-                         https://github.com/PunkPotatoQueen
-                         https://github.com/ezequielhenrique
+devs_text = """Fale com o bot manager :
+https://github.com/MathsGb
+https://github.com/Thales-Gabriel-Soares-Amorim
+https://github.com/PunkPotatoQueen
+https://github.com/ezequielhenrique
 
-Ou volte para o /menu")"""
+Ou volte para o /menu"""
+
+Offline_text = "Sinto muito mas parece que nosso site está fora do ar no momento.\n\nPeço que aguarde e tente denovo em algum tempo. Por entanto volte ao /menu"
