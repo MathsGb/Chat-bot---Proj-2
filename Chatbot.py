@@ -61,7 +61,7 @@ def periodo(msg):
 	
 	try:
 		arquivo = f'horario_{curso}_{periodo}_periodo.png'
-		url = 'https://equipi.pythonanywhere.com//arquivos/' + arquivo
+		url = 'https://equipi.pythonanywhere.com/arquivos/' + arquivo
 		image = open('./temp/horario.png','wb')
 		image.write(urllib.request.urlopen(url).read())
 		image.close()
@@ -103,6 +103,9 @@ def dev(msg):
 def conferir(msg):
 	try:
 		resposta = requests.request("GET", ("https://equipi.pythonanywhere.com/" + unidecode(msg.text)))
+		if resposta.status_code == 200:
+				resposta = resposta.content.decode('utf-8')
+
 		bot.send_message(msg.chat.id, resposta)
 
 	except requests.exceptions.ConnectionError:
